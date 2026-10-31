@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIPASAR NIAS - Sistem Informasi Pasar Ikan</title>
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, rgba(0, 43, 73, 0.9), rgba(13, 110, 253, 0.85));
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 30px;
+        }
+        .fish-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+            height: 100%;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .fish-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        .fish-img {
+            height: 180px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .price-tag {
+            color: #0d6efd;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .footer {
+            background-color: #002b49;
+            color: white;
+            margin-top: 50px;
+            padding: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                 SIPASAR <span class="text-info">NIAS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#katalog">Katalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="informasi.html">Informasi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-warning fw-semibold" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-info text-white btn-sm px-3 rounded-pill fw-semibold" data-bs-toggle="modal" data-bs-target="#modalTambah">
+                            <i class="fa-solid fa-plus me-1"></i> Tambah Data
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section text-center">
+        <div class="container">
+            <span class="badge bg-info text-dark mb-2 px-3 py-2 rounded-pill fw-bold">Kepulauan Nias, Sumatera Utara</span>
+            <h1 class="fw-bold mb-3 display-5">Sistem Informasi Pasar Ikan & Hasil Laut</h1>
+            <p class="lead mx-auto" style="max-width: 650px;">Pantau ketersediaan stok, harga komoditas laut harian, serta informasi pasar ikan di Kepulauan Nias.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="dashboard" class="mb-4">
+            <div class="row g-3">
+                <div class="col-md-3 col-6">
+                    <div class="card p-3 border-start border-primary border-4 bg-white shadow-sm">
+                        <small class="text-muted fw-bold">TOTAL KOMODITAS</small>
+                        <h3 class="fw-bold text-primary mb-0 mt-1" id="stat-total">0</h3>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="card p-3 border-start border-success border-4 bg-white shadow-sm">
+                        <small class="text-muted fw-bold">STOK MELIMPAH</small>
+                        <h3 class="fw-bold text-success mb-0 mt-1" id="stat-melimpah">0</h3>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="card p-3 border-start border-warning border-4 bg-white shadow-sm">
+                        <small class="text-muted fw-bold">STOK TERBATAS</small>
+                        <h3 class="fw-bold text-warning mb-0 mt-1" id="stat-terbatas">0</h3>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="card p-3 border-start border-info border-4 bg-white shadow-sm">
+                        <small class="text-muted fw-bold">PASAR TERDATA</small>
+                        <h3 class="fw-bold text-info mb-0 mt-1">4 Pasar</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="katalog" class="mb-5">
+            <h3 class="fw-bold mb-3"><i class="fa-solid fa-fish text-primary me-2"></i>Katalog Hasil Laut Nias</h3>
+
+<div class="container my-4">
+    <!-- Bagian Filter Pencarian -->
+    <div class="card p-3 mb-4 shadow-sm border-0">
+        <div class="row g-2">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                    <input type="text" id="searchInput" class="form-control border-start-0" placeholder="Cari nama ikan, cumi, udang..." onkeyup="filterItems()">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select id="categoryFilter" class="form-select" onchange="filterItems()">
+                    <option value="semua">Semua Kategori</option>
+                    <option value="Ikan Pelagis">Ikan Pelagis</option>
+                    <option value="Ikan Karang">Ikan Karang</option>
+                    <option value="Udang & Kerang">Udang & Kerang</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select id="pasarFilter" class="form-select" onchange="filterItems()">
+                    <option value="semua">Semua Lokasi Pasar</option>
+                    <option value="Pasar Gusit (Gunungsitoli)">Pasar Gusit</option>
+                    <option value="Pasar Teluk Dalam (Nias Selatan)">Pasar Teluk Dalam</option>
+                    <option value="Pasar Lahewa (Nias Utara)">Pasar Lahewa</option>
+                    <option value="Pasar Sirombu (Nias Barat)">Pasar Sirombu</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Kartu 1: Cumi Segar -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <img src="image/cumi.jpg" class="card-img-top object-fit-cover" style="height: 180px;" alt="Cumi Segar">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title fw-bold text-dark mb-0">Cumi Segar</h5>
+                        <span class="badge bg-secondary text-white px-2 py-1" style="font-size: 0.75rem;">Cumi Segar</span>
+                    </div>
+                    
+                    <p class="text-primary fw-bold fs-5 mb-2">Rp 35.000 <span class="text-muted fw-normal fs-6">/ kg</span></p>
+                    
+                    <p class="small text-muted mb-1"><i class="fa-solid fa-location-dot text-danger me-1"></i>Lokasi: Pasar Gusit (Gunungsitoli)</p>
+                    <p class="small text-secondary mb-3">Hasil tangkapan nelayan lokal teluk Gunungsitoli kualitas terbaik.</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-auto mb-3">
+                        <span class="badge bg-success px-2 py-1">Stok: 45 kg (Melimpah)</span>
+                        <span class="badge bg-info text-dark px-2 py-1">Terjual: 12 kg</span>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 fw-semibold py-2 rounded-3">
+                        <i class="fa-solid fa-cart-shopping me-2"></i>Beli Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kartu 2: Gurita Segar -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <img src="image/gurita.jpg" class="card-img-top object-fit-cover" style="height: 180px;" alt="Gurita Segar">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title fw-bold text-dark mb-0">Gurita Segar</h5>
+                        <span class="badge bg-secondary text-white px-2 py-1" style="font-size: 0.75rem;">Gurita Segar</span>
+                    </div>
+                    
+                    <p class="text-primary fw-bold fs-5 mb-2">Rp 45.000 <span class="text-muted fw-normal fs-6">/ kg</span></p>
+                    
+                    <p class="small text-muted mb-1"><i class="fa-solid fa-location-dot text-danger me-1"></i>Lokasi: Pasar Teluk Dalam</p>
+                    <p class="small text-secondary mb-3">Hasil tangkapan nelayan lokal Teluk Dalam kualitas terbaik.</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-auto mb-3">
+                        <span class="badge bg-success px-2 py-1">Stok: 45 kg (Melimpah)</span>
+                        <span class="badge bg-info text-dark px-2 py-1">Terjual: 20 kg</span>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 fw-semibold py-2 rounded-3">
+                        <i class="fa-solid fa-cart-shopping me-2"></i>Beli Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kartu 3: ikan cakalang -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <img src="image/ikan cakalang.jpg" class="card-img-top object-fit-cover" style="height: 180px;" alt="Gurita Segar">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title fw-bold text-dark mb-0">Ikan Cakalang Segar</h5>
+                        <span class="badge bg-secondary text-white px-2 py-1" style="font-size: 0.75rem;">Ikan Cakalang Segar</span>
+                    </div>
+                    
+                    <p class="text-primary fw-bold fs-5 mb-2">Rp 50.000 <span class="text-muted fw-normal fs-6">/ kg</span></p>
+                    
+                    <p class="small text-muted mb-1"><i class="fa-solid fa-location-dot text-danger me-1"></i>Lokasi: Pasar Lahewa</p>
+                    <p class="small text-secondary mb-3">Hasil tangkapan nelayan lokal Lahewa kualitas terbaik.</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-auto mb-3">
+                        <span class="badge bg-success px-2 py-1">Stok: 45 kg (Melimpah)</span>
+                        <span class="badge bg-info text-dark px-2 py-1">Terjual: 20 kg</span>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 fw-semibold py-2 rounded-3">
+                        <i class="fa-solid fa-cart-shopping me-2"></i>Beli Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row g-4">
+        <!-- Kartu 4: Ikan Asin -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <img src="image/ikan-asin.jpg" class="card-img-top object-fit-cover" style="height: 180px;" alt="Cumi Segar">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title fw-bold text-dark mb-0">Ikan Asin</h5>
+                        <span class="badge bg-secondary text-white px-2 py-1" style="font-size: 0.75rem;">Ikan Asin</span>
+                    </div>
+                    
+                    <p class="text-primary fw-bold fs-5 mb-2">Rp 15.000 <span class="text-muted fw-normal fs-6">/ kg</span></p>
+                    
+                    <p class="small text-muted mb-1"><i class="fa-solid fa-location-dot text-danger me-1"></i>Lokasi: Pasar Gusit (Gunungsitoli)</p>
+                    <p class="small text-secondary mb-3">Hasil tangkapan nelayan lokal teluk Gunungsitoli kualitas terbaik.</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-auto mb-3">
+                        <span class="badge bg-success px-2 py-1">Stok: 45 kg (Melimpah)</span>
+                        <span class="badge bg-info text-dark px-2 py-1">Terjual: 32 kg</span>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 fw-semibold py-2 rounded-3">
+                        <i class="fa-solid fa-cart-shopping me-2"></i>Beli Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kartu 5: Ikan Kakap-Merah Segar -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <img src="image/kakap-merah.jpg" class="card-img-top object-fit-cover" style="height: 180px;" alt="Gurita Segar">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title fw-bold text-dark mb-0">Ikan Kakap-Merah Segar</h5>
+                        <span class="badge bg-secondary text-white px-2 py-1" style="font-size: 0.75rem;">Ikan Kakap-Merah Segar</span>
+                    </div>
+                    
+                    <p class="text-primary fw-bold fs-5 mb-2">Rp 60.000 <span class="text-muted fw-normal fs-6">/ kg</span></p>
+                    
+                    <p class="small text-muted mb-1"><i class="fa-solid fa-location-dot text-danger me-1"></i>Lokasi: Pasar Gusit (Gunungsitoli)</p>
+                    <p class="small text-secondary mb-3">Hasil tangkapan nelayan lokal teluk Gunungsitoli kualitas terbaik.</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-auto mb-3">
+                        <span class="badge bg-success px-2 py-1">Stok: 80 kg (Melimpah)</span>
+                        <span class="badge bg-info text-dark px-2 py-1">Terjual: 40 kg</span>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 fw-semibold py-2 rounded-3">
+                        <i class="fa-solid fa-cart-shopping me-2"></i>Beli Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kartu 6: Ikan Kerapu Segar -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <img src="image/kerapu.jpg" class="card-img-top object-fit-cover" style="height: 180px;" alt="Gurita Segar">
+                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title fw-bold text-dark mb-0">Ikan Kerapu Segar</h5>
+                        <span class="badge bg-secondary text-white px-2 py-1" style="font-size: 0.75rem;">Ikan Kerapu Segar</span>
+                    </div>
+                    
+                    <p class="text-primary fw-bold fs-5 mb-2">Rp 70.000 <span class="text-muted fw-normal fs-6">/ kg</span></p>
+                    
+                    <p class="small text-muted mb-1"><i class="fa-solid fa-location-dot text-danger me-1"></i>Lokasi: Pasar Sirombu</p>
+                    <p class="small text-secondary mb-3">Hasil tangkapan nelayan lokal Sirombu kualitas terbaik.</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-auto mb-3">
+                        <span class="badge bg-success px-2 py-1">Stok: 75 kg (Melimpah)</span>
+                        <span class="badge bg-info text-dark px-2 py-1">Terjual: 90 kg</span>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 fw-semibold py-2 rounded-3">
+                        <i class="fa-solid fa-cart-shopping me-2"></i>Beli Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Modal Tambah Data -->
+    <div class="modal fade" id="modalTambah" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-square-plus me-2"></i>Tambah Komoditas Laut</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="fishForm" onsubmit="tambahData(event)">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nama Komoditas / Ikan</label>
+                            <input type="text" id="itemName" class="form-control" placeholder="Contoh: Ikan Kakap Merah" required>
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Kategori</label>
+                                <select id="itemCategory" class="form-select" required>
+                                    <option value="Ikan Pelagis">Ikan Pelagis</option>
+                                    <option value="Ikan Karang">Ikan Karang</option>
+                                    <option value="Udang & Kerang">Udang & Kerang</option>
+                                    <option value="Hasil Olahan">Hasil Olahan</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-bold">Status Stok</label>
+                                <select id="itemStatus" class="form-select" required>
+                                    <option value="Melimpah">Melimpah</option>
+                                    <option value="Terbatas">Terbatas</option>
+                                    <option value="Kosong">Kosong</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-4">
+                                <label class="form-label fw-bold">Harga/Kg (Rp)</label>
+                                <input type="number" id="itemPrice" class="form-control" placeholder="35000" required>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label fw-bold">Stok (Kg)</label>
+                                <input type="number" id="itemStock" class="form-control" placeholder="50" required>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label fw-bold">Pasar</label>
+                                <select id="itemMarket" class="form-select" required>
+                                    <option value="Pasar Gusit (Gunungsitoli)">Pasar Gusit</option>
+                                    <option value="Pasar Teluk Dalam (Nias Selatan)">Pasar Teluk Dalam</option>
+                                    <option value="Pasar Lahewa (Nias Utara)">Pasar Lahewa</option>
+                                    <option value="Pasar Sirombu (Nias Barat)">Pasar Sirombu</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Link URL Gambar Ikan</label>
+                            <input type="url" id="itemImage" class="form-control" placeholder="https://images.unsplash.com/..." required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Keterangan Singkat</label>
+                            <textarea id="itemDesc" class="form-control" rows="2" placeholder="Tangkapan segar nelayan lokal..."></textarea>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan Data</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <h5 class="fw-bold mb-2"><i class="fa-solid fa-fish-fins text-info me-2"></i>SIPASAR NIAS</h5>
+            <p class="small text-white-50 mb-0">&copy; 2026 Pemerintah Daerah Kepulauan Nias - Dinas Kelautan & Perikanan.</p>
+        </div>
+    </footer>
+
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

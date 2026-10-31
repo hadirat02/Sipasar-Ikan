@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi Pasar - SIPASAR NIAS</title>
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fa-solid fa-fish-fins text-info me-1"></i> SIPASAR <span class="text-info">NIAS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="komponen.html">Informasi Pasar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row mb-4 align-items-center">
+            <div class="col">
+                <h2 class="fw-bold mb-1"><i class="fa-solid fa-store text-primary me-2"></i>Direktori Pasar Ikan & Hasil Laut Nias</h2>
+                <p class="text-muted mb-0">Informasi pusat pelelangan ikan dan pasar tradisional terdata di wilayah Kepulauan Nias.</p>
+            </div>
+        </div>
+
+        <!-- Filter / Pencarian Pasar -->
+        <div class="card p-4 mb-4 shadow-sm border-0 rounded-4">
+            <h5 class="fw-bold mb-3"><i class="fa-solid fa-filter text-primary me-2"></i>Cari Lokasi Pasar Wilayah Nias</h5>
+            <div class="row g-3">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                        <input type="text" class="form-control border-start-0" placeholder="Ketik nama pasar atau kabupaten (Contoh: Gunungsitoli)...">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-select">
+                        <option selected>Pilih Wilayah Kabupaten/Kota</option>
+                        <option value="1">Kota Gunungsitoli</option>
+                        <option value="2">Nias Selatan</option>
+                        <option value="3">Nias Utara</option>
+                        <option value="4">Nias Barat</option>
+                        <option value="5">Kabupaten Nias</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pengumuman / Info Wilayah -->
+        <div class="alert alert-info d-flex align-items-center shadow-sm rounded-4 mb-4" role="alert">
+            <i class="fa-solid fa-circle-info me-3 fs-4 text-primary"></i>
+            <div>
+                <strong>Jadwal Bongkar Muat & Lelang:</strong> Aktivitas distribusi hasil tangkapan nelayan laut di seluruh pasar utama Kepulauan Nias beroperasi setiap hari mulai pukul 05:00 hingga 11:00 WIB.
+            </div>
+        </div>
+
+        <!-- Daftar Kartu Wilayah Pasar -->
+        <div class="row g-4">
+            <!-- Pasar 1 -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h4 class="fw-bold text-dark mb-0">Pasar Gusit (Gunungsitoli)</h4>
+                            <span class="badge bg-success px-3 py-2 rounded-pill">Buka / Aktif</span>
+                        </div>
+                        <p class="text-muted small mb-3"><i class="fa-solid fa-location-dot text-danger me-1"></i> Kota Gunungsitoli, Kepulauan Nias</p>
+                        <p class="card-text text-secondary mb-3">Pusat perdagangan grosir dan eceran hasil laut terbesar di Kepulauan Nias yang menampung pasokan ikan pelagis dan hasil tangkapan dari Samudera Hindia.</p>
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <span class="badge bg-light text-dark border px-2 py-1">Ikan Cakalang</span>
+                            <span class="badge bg-light text-dark border px-2 py-1">Ikan Tongkol</span>
+                            <span class="badge bg-light text-dark border px-2 py-1">Cumi-Cumi</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Komoditas Harian: <strong>Melimpah</strong></small>
+                            <button class="btn btn-outline-primary btn-sm rounded-pill px-3">Lihat Stok Pasar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pasar 2 -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h4 class="fw-bold text-dark mb-0">Pasar Teluk Dalam</h4>
+                            <span class="badge bg-success px-3 py-2 rounded-pill">Buka / Aktif</span>
+                        </div>
+                        <p class="text-muted small mb-3"><i class="fa-solid fa-location-dot text-danger me-1"></i> Nias Selatan</p>
+                        <p class="card-text text-secondary mb-3">Wilayah pesisir strategis yang terkenal sebagai sentra penghasil ikan karang berkualitas tinggi, kerapu, serta hasil tangkapan laut dalam.</p>
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <span class="badge bg-light text-dark border px-2 py-1">Ikan Kerapu</span>
+                            <span class="badge bg-light text-dark border px-2 py-1">Kakap Merah</span>
+                            <span class="badge bg-light text-dark border px-2 py-1">Lobster</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Komoditas Harian: <strong>Terbatas</strong></small>
+                            <button class="btn btn-outline-primary btn-sm rounded-pill px-3">Lihat Stok Pasar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pasar 3 -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h4 class="fw-bold text-dark mb-0">Pasar Lahewa</h4>
+                            <span class="badge bg-success px-3 py-2 rounded-pill">Buka / Aktif</span>
+                        </div>
+                        <p class="text-muted small mb-3"><i class="fa-solid fa-location-dot text-danger me-1"></i> Nias Utara</p>
+                        <p class="card-text text-secondary mb-3">Pusat pelelangan ikan tradisional di pesisir utara Nias yang melayani pasokan tambak serta hasil laut segar bagi masyarakat setempat.</p>
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <span class="badge bg-light text-dark border px-2 py-1">Udang Windu</span>
+                            <span class="badge bg-light text-dark border px-2 py-1">Ikan Bandeng</span>
+                            <span class="badge bg-light text-dark border px-2 py-1">Ikan Kembung</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Komoditas Harian: <strong>Melimpah</strong></small>
+                            <button class="btn btn-outline-primary btn-sm rounded-pill px-3">Lihat Stok Pasar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pasar 4 -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h4 class="fw-bold text-dark mb-0">Pasar Sirombu</h4>
+                            <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Operasional Terbatas</span>
+                        </div>
+                        <p class="text-muted small mb-3"><i class="fa-solid fa-location-dot text-danger me-1"></i> Nias Barat</p>
+                        <p class="card-text text-secondary mb-3">Kawasan pelabuhan dan pasar pesisir barat Nias yang langsung menghadap Samudera Hindia dengan hasil tangkapan khas nelayan lokal.</p>
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <span class="badge bg-light text-dark border px-2 py-1">Gurita Segar</span>
+                            <span class="badge bg-light text-dark border px-2 py-1">Ikan Tuna</span>
+                            <span class="badge bg-light text-dark border px-2 py-1">Kerang Laut</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Komoditas Harian: <strong>Terbatas</strong></small>
+                            <button class="btn btn-outline-primary btn-sm rounded-pill px-3">Lihat Stok Pasar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="small text-white-50 mb-0">&copy; 2026 SIPASAR NIAS - Sistem Informasi Pasar Ikan & Hasil Laut Kepulauan Nias.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5.3.3 JS Bundle CDN -->
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
